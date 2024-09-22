@@ -1,3 +1,101 @@
-<h1>
-    Hello
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston House Price Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .form-section {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+            width: 40%;
+        }
+
+        .form-section h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-section input[type="text"], 
+        .form-section input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+
+        .form-section button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-section button:hover {
+            background-color: #ff5a4d;
+        }
+
+        /* Style for the prediction result */
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            color: #ff6f61;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h1>Boston House Price Prediction</h1>
+            <form action="{{ url_for('predict') }}" method="post">
+                <input type="text" name="SquareFeet" placeholder="Area (Square Feet)" required><br>
+                <input type="text" name="Bedrooms" placeholder="Bedrooms" required><br>
+                <input type="text" name="Bathrooms" placeholder="Bathrooms" required><br>
+                <input type="text" name="Neighborhood" placeholder="Neighborhood" required><br>
+                <input type="text" name="YearBuilt" placeholder="Year Built" required><br>
+                <button type="submit">Predict</button>
+            </form>
+            
+            <!-- The prediction result will appear below the form -->
+            {% if prediction_text %}
+                <div class="result">
+                    {{ prediction_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    
+</body>
+</html>
